@@ -81,7 +81,7 @@ body{
 }
 
 .container{
-    max-width: 690px;
+    max-width: 720px;
     width: 100%;
     background: #fff;
     border-radius: 7px;
@@ -187,4 +187,10 @@ body{
     font-size: 17px;
     border-radius: 5px;
     background: darkcyan;
+    transition: transform 0.3s ease, color 0.3s ease;
+    z-index: 2;
+}
+
+.container button:hover{
+    transform: scale(1.1);
 }
