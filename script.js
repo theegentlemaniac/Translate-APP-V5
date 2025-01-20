@@ -1,7 +1,11 @@
 const selectTag = document.querySelectorAll("select");
 const pasteButton = document.querySelector(".paste");
-const fromTextArea = document.querySelector(".from-text");
+const fromText = document.querySelector(".from-text");
+const toTexT = document.querySelector(".to-text");
+const exchangeIcon = document.querySelector(".exchange");  
 const binIcon = document.querySelector('.bin-icon');
+translateBtn = document.querySelector("button");
+icons = document.querySelectorAll(".row i");
 
 // Populate language options
 selectTag.forEach((tag, id) => {
@@ -18,23 +22,53 @@ selectTag.forEach((tag, id) => {
     }
 });
 
-// Hide the paste button when user starts typing
-fromTextArea.addEventListener("input", () => {
-    if (fromTextArea.value.trim().length > 0) {
-        pasteButton.style.display = "none"; // Hide the Paste button
+translateBtn.addEventListener("click", () => {
+    let text = fromText.value;
+    translateFrom = selectTag[0].value,
+    translateTo = selectTag[1].value;
+
+    let apiUrl = `https://api.mymemory.translated.net/get?q=${text}&langpair=${translateFrom}|${translateTo}`;
+
+    fetch(apiUrl).then(res => res.json()).then(data => {
+
+        toTexT.value = data.responseData.translatedText;
+    })
+
+    console.log(text, translateFrom, translateTo);
+});
+
+exchangeIcon.addEventListener("click", () => {
+  
+    let tempText = fromText.value; 
+    let tempLang = selectTag[0].value; 
+
+
+    fromText.value = toTexT.value;
+    toTexT.value = tempText; 
+
+    
+    selectTag[0].value = selectTag[1].value; 
+    selectTag[1].value = tempLang; 
+});
+
+
+
+fromText.addEventListener("input", () => {
+    if (fromText.value.trim().length > 0) {
+        pasteButton.style.display = "none"; 
     } else {
-        pasteButton.style.display = "flex"; // Show the Paste button again
+        pasteButton.style.display = "flex"; 
     }
 });
 
 
 
-// Hide the bin icon initially
+
 binIcon.style.display = 'none';
 
 // Add an event listener to detect input changes
-fromTextArea.addEventListener('input', () => {
-    if (fromTextArea.value.trim().length > 0) {
+fromText.addEventListener('input', () => {
+    if (fromText.value.trim().length > 0) {
         binIcon.style.display = 'block'; // Show the bin icon if there's text
     } else {
         binIcon.style.display = 'none'; // Hide the bin icon if textarea is empty
@@ -43,6 +77,25 @@ fromTextArea.addEventListener('input', () => {
 
 // Add an event listener to the bin icon to clear the textarea
 binIcon.addEventListener('click', () => {
-    fromTextArea.value = ''; // Clear the text
+    fromText.value = ''; // Clear the text
     binIcon.style.display = 'none'; // Hide the bin icon after clearing
 });
+
+icons.forEach(icon => {
+    icon.addEventListener("click", ({target}) => {
+        if(target.classList.contains("fa-copy"))
+        {
+            if(target.id == "from"){
+                navigator.clipboard.writeText(fromText.value);
+            }
+
+            else{
+                navigator.clipboard.writeText(toTexT.value);
+            }
+        }
+
+        else{
+
+        }
+    });
+})
