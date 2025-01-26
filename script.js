@@ -27,6 +27,9 @@ translateBtn.addEventListener("click", () => {
     translateFrom = selectTag[0].value,
     translateTo = selectTag[1].value;
 
+    /*if(!text) return;
+    toTexT.setAttribute("placeholder, Translating...");*/
+
     let apiUrl = `https://api.mymemory.translated.net/get?q=${text}&langpair=${translateFrom}|${translateTo}`;
 
     fetch(apiUrl).then(res => res.json()).then(data => {
@@ -95,6 +98,21 @@ icons.forEach(icon => {
         }
 
         else{
+
+            let utterance;
+
+            if(target.id == "from"){
+                utterance = new SpeechSynthesisUtterance(fromText.value);
+                utterance.lang = selectTag[0].value;
+            }
+
+            else{
+                utterance = new SpeechSynthesisUtterance(toTexT.value);
+                utterance.lang = selectTag[1].value;
+            }
+
+            speechSynthesis.speak(utterance);
+
 
         }
     });
