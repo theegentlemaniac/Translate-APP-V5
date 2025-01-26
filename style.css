@@ -11,7 +11,7 @@ body{
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    background: lightcyan;
+    background-color: rgba(18,17,23,255);
 }
 
 /* Bin Icon Styles */
