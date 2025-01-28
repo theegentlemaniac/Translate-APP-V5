@@ -66,6 +66,16 @@ fromText.addEventListener("input", () => {
 });
 
 
+pasteButton.addEventListener("click", async () => {
+    try {
+        const textFromClipboard = await navigator.clipboard.readText();
+        fromText.value = textFromClipboard;
+        pasteButton.style.display = "none";
+    } catch (err) {
+        console.error('Failed to read clipboard contents: ', err);
+    }
+});
+
 
 
 binIcon.style.display = 'none';
@@ -118,3 +128,42 @@ icons.forEach(icon => {
         }
     });
 })
+
+
+const microphoneIcon = document.querySelector(".fa-microphone");
+const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+
+// Configure the SpeechRecognition API
+recognition.continuous = false; // Stops listening after speech input ends
+recognition.interimResults = false; // Only return final results
+recognition.lang = selectTag[0].value; // Set language dynamically
+
+// Start speech recognition when the microphone icon is clicked
+microphoneIcon.addEventListener("click", () => {
+    try {
+        recognition.start();
+        microphoneIcon.style.color = "red"; // Change color to indicate recording
+    } catch (err) {
+        console.error("Speech recognition failed to start:", err);
+        alert("Speech recognition failed to start. Please try again.");
+    }
+});
+
+// Capture the transcription result and display it in the textarea
+recognition.addEventListener("result", (event) => {
+    const transcript = event.results[0][0].transcript;
+    fromText.value = transcript; // Replace text with the new transcription
+    console.log("Transcript:", transcript);
+});
+
+// Handle recognition end (e.g., when the user stops speaking)
+recognition.addEventListener("end", () => {
+    microphoneIcon.style.color = ""; // Reset the microphone icon color
+    console.log("Speech recognition ended.");
+});
+
+// Handle recognition errors
+recognition.addEventListener("error", (event) => {
+    console.error("Speech recognition error:", event.error);
+    alert("Speech recognition error: " + event.error);
+});
