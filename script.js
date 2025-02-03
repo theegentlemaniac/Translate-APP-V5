@@ -1,4 +1,4 @@
-const selectTag = document.querySelectorAll("select");
+const selectTag = document.querySelectorAll("select:not(#download-format)"); // Exclude download dropdown
 const pasteButton = document.querySelector(".paste");
 const fromText = document.querySelector(".from-text");
 const toTexT = document.querySelector(".to-text");
@@ -8,9 +8,7 @@ const translateBtn = document.querySelector("button");
 const icons = document.querySelectorAll(".row i");
 const fileInput = document.getElementById("fileInput");
 
-// Populate language options
-// Populate language options
-
+// Populate language options (only for country dropdowns)
 selectTag.forEach((tag, id) => {
     for (const country_code in countries) {
         let selected;
@@ -25,50 +23,47 @@ selectTag.forEach((tag, id) => {
     }
 });
 
+// Translate button event listener
 translateBtn.addEventListener("click", () => {
     let text = fromText.value;
     translateFrom = selectTag[0].value,
     translateTo = selectTag[1].value;
 
-    if(!text) return;
+    if (!text) return;
     toTexT.setAttribute("placeholder", "Translating...");
 
     let apiUrl = `https://api.mymemory.translated.net/get?q=${text}&langpair=${translateFrom}|${translateTo}`;
 
     fetch(apiUrl).then(res => res.json()).then(data => {
-
         toTexT.value = data.responseData.translatedText;
         toTexT.setAttribute("placeholder", "Translation");
-    })
+    });
 
     console.log(text, translateFrom, translateTo);
 });
 
+// Exchange languages and text
 exchangeIcon.addEventListener("click", () => {
-  
-    let tempText = fromText.value; 
-    let tempLang = selectTag[0].value; 
-
+    let tempText = fromText.value;
+    let tempLang = selectTag[0].value;
 
     fromText.value = toTexT.value;
-    toTexT.value = tempText; 
+    toTexT.value = tempText;
 
-    
-    selectTag[0].value = selectTag[1].value; 
-    selectTag[1].value = tempLang; 
+    selectTag[0].value = selectTag[1].value;
+    selectTag[1].value = tempLang;
 });
 
-
-
+// Show/hide paste button based on input
 fromText.addEventListener("input", () => {
     if (fromText.value.trim().length > 0) {
-        pasteButton.style.display = "none"; 
+        pasteButton.style.display = "none";
     } else {
-        pasteButton.style.display = "flex"; 
+        pasteButton.style.display = "flex";
     }
 });
 
-
+// Paste text from clipboard
 pasteButton.addEventListener("click", async () => {
     try {
         const textFromClipboard = await navigator.clipboard.readText();
@@ -79,64 +74,48 @@ pasteButton.addEventListener("click", async () => {
     }
 });
 
-
-
+// Show/hide bin icon based on input
 binIcon.style.display = 'none';
-
-// Add an event listener to detect input changes
 fromText.addEventListener('input', () => {
     if (fromText.value.trim().length > 0) {
-        binIcon.style.display = 'block'; // Show the bin icon if there's text
+        binIcon.style.display = 'block';
     } else {
-        binIcon.style.display = 'none'; // Hide the bin icon if textarea is empty
+        binIcon.style.display = 'none';
     }
 });
 
-// Add an event listener to the bin icon to clear the textarea
+// Clear textarea when bin icon is clicked
 binIcon.addEventListener('click', () => {
-    fromText.value = ''; // Clear the text
-    binIcon.style.display = 'none'; // Hide the bin icon after clearing
+    fromText.value = '';
+    binIcon.style.display = 'none';
 });
 
+// Copy text or speak text
 icons.forEach(icon => {
-    icon.addEventListener("click", ({target}) => {
-        if(target.classList.contains("fa-copy"))
-        {
-            if(target.id == "from"){
+    icon.addEventListener("click", ({ target }) => {
+        if (target.classList.contains("fa-copy")) {
+            if (target.id == "from") {
                 navigator.clipboard.writeText(fromText.value);
-            }
-
-            else{
+            } else {
                 navigator.clipboard.writeText(toTexT.value);
             }
-        }
-
-        else{
-
+        } else {
             let utterance;
-
-            if(target.id == "from"){
+            if (target.id == "from") {
                 utterance = new SpeechSynthesisUtterance(fromText.value);
                 utterance.lang = selectTag[0].value;
-            }
-
-            else{
+            } else {
                 utterance = new SpeechSynthesisUtterance(toTexT.value);
                 utterance.lang = selectTag[1].value;
             }
-
             speechSynthesis.speak(utterance);
-
-
         }
     });
-})
+});
 
-
+// Speech recognition setup
 const microphoneIcon = document.querySelector(".fa-microphone");
 const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-
-// Configure the SpeechRecognition API
 recognition.continuous = false; // Stops listening after speech input ends
 recognition.interimResults = false; // Only return final results
 recognition.lang = selectTag[0].value; // Set language dynamically
@@ -170,20 +149,6 @@ recognition.addEventListener("error", (event) => {
     console.error("Speech recognition error:", event.error);
     alert("Speech recognition error: " + event.error);
 });
-
-// Translate button event listener
-translateBtn.addEventListener("click", () => {
-    const text = fromText.value;
-    if (!text) return;
-    translateText(text);
-});
-
-
-
-
-
-
-
 
 // File upload event listener
 fileInput.addEventListener("change", async (event) => {
@@ -265,4 +230,66 @@ async function translateText(text) {
     }
 }
 
-// Other event listeners (paste, exchange, bin, icons, etc.) remain unchanged
+// Download button and format selector
+const downloadButton = document.querySelector(".download-icon");
+const downloadFormat = document.getElementById("download-format");
+
+// Function to download the translated text
+downloadButton.addEventListener("click", () => {
+    const translatedText = toTexT.value.trim();
+    if (!translatedText) {
+        alert("No translated text to download!");
+        return;
+    }
+
+    const format = downloadFormat.value;
+
+    if (format === "txt") {
+        downloadAsText(translatedText);
+    } else if (format === "pdf") {
+        downloadAsPDF(translatedText);
+    } else if (format === "docx") {
+        downloadAsDocx(translatedText);
+    }
+});
+
+// Function to download as a TXT file
+function downloadAsText(text) {
+    const blob = new Blob([text], { type: "text/plain" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "translation.txt";
+    a.click();
+}
+
+// Function to download as a PDF file using jsPDF
+function downloadAsPDF(text) {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    doc.text(text, 10, 10);
+    doc.save("translation.pdf");
+}
+
+// Function to download as a DOCX file using docx.js
+function downloadAsDocx(text) {
+    const doc = new docx.Document({
+        sections: [
+            {
+                properties: {},
+                children: [
+                    new docx.Paragraph({
+                        text: text,
+                        spacing: { after: 200 },
+                    }),
+                ],
+            },
+        ],
+    });
+
+    docx.Packer.toBlob(doc).then((blob) => {
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = "translation.docx";
+        a.click();
+    });
+}
