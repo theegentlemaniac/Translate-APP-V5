@@ -212,4 +212,32 @@ body{
     transform: scale(1.05); /* Slight zoom effect */
 }
 
+.download-container {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centers content horizontally */
+    margin: 20px auto 0; /* Centers the container itself */
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid darkcyan;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #fff;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+    width: fit-content; /* Adjusts width to fit the content */
+}
 
+/* Centers the dropdown inside the container */
+.download-format {
+    margin-left: 10px; /* Adds spacing between icon and dropdown */
+    text-align: center;
+    font-size: 16px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+/* Optional: Add hover effects */
+.download-container:hover {
+    border-color: rgb(0, 50, 50);
+    transform: scale(1.05);
+}
