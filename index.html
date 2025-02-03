@@ -9,19 +9,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
     <script>
         pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.worker.min.js";
-      </script>
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.8/mammoth.browser.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/tesseract.js@2.1.4/dist/tesseract.min.js"></script>
-
 </head>
 <body>
 
     <div class="container">
         <div class="wrapper">
             <div class="text-input">
-
-        
-                <textarea spellcheck="false" class="from-text" placeholder="Enter Text "></textarea>
+                <textarea spellcheck="false" class="from-text" placeholder="Enter Text"></textarea>
 
                 <div class="paste">
                     <i class="fa-solid fa-paste"></i>
@@ -32,62 +29,50 @@
                     <i class="fa fa-trash" aria-hidden="true"></i>
                 </div>
 
-                
-                <textarea spellcheck="false" readonly disabled class="to-text" placeholder="Translation "></textarea>
-                
+                <textarea spellcheck="false" readonly disabled class="to-text" placeholder="Translation"></textarea>
             </div>
 
-            
-
             <ul class="controls">
-
                 <li class="row from">
                     <div class="icons">
                         <i id="from" class="fa-solid fa-volume-high"></i>
                         <i id="from" class="fa-solid fa-copy"></i>
                         <i class="fa-solid fa-microphone"></i>
-
-
-                        
                     </div>
 
-                    <select>
-                    
-                    </select>
+                    <select></select>
                 </li>
 
                 <li class="exchange">
                     <i class="fa fa-exchange"></i>
                 </li>
 
-                
-
                 <li class="row to">
-
-                    <select>
-
-
-                    </select>
+                    <select></select>
                     <div class="icons">
                         <i id="to" class="fa-solid fa-volume-up"></i>
-                        <i id="to" class= "fa-solid fa-copy"></i>
-                        <i class="fa-solid fa-microphone"></i>
-                        
+                        <i id="to" class="fa-solid fa-copy"></i>
                     </div>
                 </li>
-
-
-
             </ul>
         </div>
+
         <button>Translate Text</button>
         <input type="file" id="fileInput" accept=".txt, .docx, .pdf">
+
+        <!-- Download Section -->
+        <div class="download-container">
+            <i class="fa-solid fa-download download-icon"></i>
+            <select class="download-format" id="download-format">
+                <option value="txt">Download as TXT</option>
+                <option value="pdf">Download as PDF</option>
+                <option value="docx">Download as DOCX</option>
+            </select>
+        </div>
 
     </div>
 
     <script src="./countries.js"></script>
     <script src="./script.js"></script>
-   
-    
 </body>
 </html>
