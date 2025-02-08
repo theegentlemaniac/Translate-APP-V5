@@ -132,11 +132,16 @@ microphoneIcon.addEventListener("click", () => {
 });
 
 // Capture the transcription result and display it in the textarea
+// Capture the transcription result and display it in the textarea
 recognition.addEventListener("result", (event) => {
     const transcript = event.results[0][0].transcript;
     fromText.value = transcript; // Replace text with the new transcription
     console.log("Transcript:", transcript);
+
+    // Manually trigger the "input" event to update UI elements
+    fromText.dispatchEvent(new Event("input"));
 });
+
 
 // Handle recognition end (e.g., when the user stops speaking)
 recognition.addEventListener("end", () => {
