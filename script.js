@@ -69,10 +69,14 @@ pasteButton.addEventListener("click", async () => {
         const textFromClipboard = await navigator.clipboard.readText();
         fromText.value = textFromClipboard;
         pasteButton.style.display = "none";
+
+        // Manually trigger input event
+        fromText.dispatchEvent(new Event("input"));
     } catch (err) {
         console.error('Failed to read clipboard contents: ', err);
     }
 });
+
 
 // Show/hide bin icon based on input
 binIcon.style.display = 'none';
