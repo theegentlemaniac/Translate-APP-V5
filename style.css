@@ -1,243 +1,251 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 }
 
-body{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    background-color: rgba(18,17,23,255);
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: rgba(18, 17, 23, 255);
 }
 
 /* Bin Icon Styles */
 .bin-icon {
-    position: absolute;
-    top: 5%; /* Space from the top of the section */
-    right: 52%; /* Align to the top-right corner of the left column */
-    color: darkcyan;
-    font-size: 20px;
-    cursor: pointer;
-    transition: transform 0.3s ease, color 0.3s ease;
-    z-index: 2; /* Ensure it appears above other elements */
+  position: absolute;
+  top: 2%; /* Space from the top of the section */
+  right: 50.5%; /* Align to the top-right corner of the left column */
+  color: darkcyan;
+  font-size: 14px;
+  cursor: pointer;
+  transition: transform 0.3s ease, color 0.3s ease;
+  z-index: 2; /* Ensure it appears above other elements */
+  
 }
 
 .bin-icon:hover {
-    color: rgb(0, 50, 50); /* Change color on hover */
+  color: rgb(0, 50, 50); /* Change color on hover */
 }
 
-
-.paste{
-    position: absolute;
-    top: 50%;
-    left: 90px;
-    transform: translateY(-50%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: darkcyan;
-    font-size: 30px;
-    cursor: pointer;
-    transition: transform 0.7s ease;
-    border: 2px solid darkcyan;
-    padding: 10px;
-    transition: transform 0.7s ease, coloe ease, border-color 0.3s ease;
-    text-align: center;
-    width: 120px;
-    height: 50px;
-    border-radius: 3px;
+.paste {
+  position: absolute;
+  top: 50%;
+  left: 110px;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: darkcyan;
+  font-size: 30px;
+  cursor: pointer;
+  transition: transform 0.7s ease;
+  border: 2px solid darkcyan;
+  padding: 10px;
+  transition: transform 0.7s ease, color ease, border-color 0.3s ease;
+  text-align: center;
+  width: 120px;
+  height: 50px;
+  border-radius: 3px;
 }
 
 .paste:hover {
-    color: rgb(0, 50, 50);
-    border-color: rgb(0,50,50);
-    transform: translateY(-50%) scale(1.1); /* Slightly larger on hover */
+  color: rgb(0, 50, 50);
+  border-color: rgb(0, 50, 50);
+  transform: translateY(-50%) scale(1.1); /* Slightly larger on hover */
 }
 
-.paste .paste-text{
-    font-size: 12px;
-    color: darkcyan;
-    margin-top: 8px;
-    margin-left: 5px;
+.paste .paste-text {
+  font-size: 12px;
+  color: darkcyan;
+  margin-top: 8px;
+  margin-left: 5px;
 }
 
-.paste:hover .paste-text{
-    color: black;
+.paste:hover .paste-text {
+  color: black;
 }
 
-
-.text-input{
-    position: relative;
-    left: 10px;
+.text-input {
+  position: relative;
+  left: 10px;
 }
 
-.from-text{
-    padding-left: 50px;
+.from-text {
+  padding-left: 50px;
+  width: 85%;
 }
 
-.container{
-    max-width: 720px;
-    width: 100%;
-    background: #fff;
-    border-radius: 7px;
-    padding: 30px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.01);
+/* Updated Container Size */
+.container {
+  max-width: 900px; /* Increased from 720px to 900px */
+  width: 100%;
+  background: #fff;
+  border-radius: 7px;
+  padding: 30px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.01);
 }
 
-.wrapper{
-    border-radius: 5px;
-    border: 1px solid #ccc;
+.wrapper {
+  border-radius: 5px;
+  border: 1px solid #ccc;
 }
 
-.wrapper .text-input{
-    display: flex;
-    border-bottom: 1px solid #ccc;
+.wrapper .text-input {
+  display: flex;
+  border-bottom: 1px solid #ccc;
 }
 
-.text-input .to-text{
-    border-radius:0px ;
-    border-left: 1px solid #bbb;
+.text-input .to-text {
+  border-radius: 0px;
+  border-left: 1px solid #bbb;
 }
 
-.text-input textarea{
-    height: 250px;
-    width: 100%;
-    border:none ;
-    outline: none;
-    font-size: 18px;
-    background: none;
-    border-radius: 5px;
-    padding: 10px 15px;
-    resize: none;
+.text-input textarea {
+  height: 250px;
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 18px;
+  background: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  resize: none;
 }
 
-.text-input textarea::placeholder{
-    color: #b7b6b6;
+.text-input textarea::placeholder {
+  color: #b7b6b6;
 }
 
-.controls, li, .icons, .icons i{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    color: darkcyan;
+.controls,
+li,
+.icons,
+.icons i {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: darkcyan;
 }
 
-.controls{
-    list-style: none;
-    padding: 12px 15px;
+.controls {
+  list-style: none;
+  padding: 12px 15px;
 }
 
-.controls .row .icons{
-    width: 38% ;
+.controls .row .icons {
+  width: 38%;
 }
 
-.controls .row .icons i{
-    width: 50px;
-    color: #adadad;
-    font-size: 14px;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-    justify-content: center;
+.controls .row .icons i {
+  width: 50px;
+  color: #adadad;
+  font-size: 14px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  justify-content: center;
 }
 
-.controls .row.from .icons{
-    padding-right: 15px;
-    border-right: 1px solid #ccc;
+.controls .row.from .icons {
+  padding-right: 15px;
+  border-right: 1px solid #ccc;
 }
 
-.controls .row.to .icons{
-    padding-left: 15px;
-    border-left: 1px solid #ccc;
+.controls .row.to .icons {
+  padding-left: 15px;
+  border-left: 1px solid #ccc;
 }
 
-.controls .row select{
-    color: #333;
-    border: none;
-    outline: none;
-    font-size: 18px;
-    background: none;
-    padding-left: 5px;
+.controls .row select {
+  color: #333;
+  border: none;
+  outline: none;
+  font-size: 18px;
+  background: none;
+  padding-left: 5px;
 }
 
-.text-input textarea::-webkit-scrollbar{
-    width: 4px;
+.text-input textarea::-webkit-scrollbar {
+  width: 4px;
 }
 
-.controls .row select::-webkit-scrollbar{
-    width: 8px;
+.controls .row select::-webkit-scrollbar {
+  width: 8px;
 }
 
-
-.controls i:active{
-    transform: scale(0.9);
+.controls i:active {
+  transform: scale(0.9);
 }
 
-.container button{
-    width: 100%;
-    padding: 14px;
-    outline: none;
-    border: none;
-    color: #fff;
-    cursor: pointer;
-    margin-top: 20px;
-    font-size: 17px;
-    border-radius: 5px;
-    background: darkcyan;
-    transition: transform 0.3s ease, color 0.3s ease;
-    z-index: 2;
+/* Adjusted Translate Button Scale */
+.container button {
+  width: 100%;
+  padding: 14px;
+  outline: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  margin-top: 20px;
+  font-size: 17px;
+  border-radius: 5px;
+  background: darkcyan;
+  transition: transform 0.3s ease, color 0.3s ease;
+  z-index: 2;
 }
 
-.container button:hover{
-    transform: scale(1.1);
+.container button:hover {
+  transform: scale(1.05); /* Reduced scaling from 1.1 to 1.05 */
 }
 
 #fileInput {
-    display: block;
-    margin: 20px auto 0; /* Adds spacing and centers horizontally */
-    padding: 10px;
-    font-size: 16px;
-    border: 2px solid darkcyan;
-    border-radius: 5px;
-    cursor: pointer;
-    background-color: #fff;
-    transition: transform 0.3s ease, border-color 0.3s ease;
+  display: block;
+  margin: 20px auto 0; /* Adds spacing and centers horizontally */
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid darkcyan;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #fff;
+  transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
 #fileInput:hover {
-    border-color: rgb(0, 50, 50);
-    transform: scale(1.05); /* Slight zoom effect */
+  border-color: rgb(0, 50, 50);
+  transform: scale(1.05); /* Slight zoom effect */
 }
 
 .download-container {
-    display: flex;
-    align-items: center;
-    justify-content: center; /* Centers content horizontally */
-    margin: 20px auto 0; /* Centers the container itself */
-    padding: 10px;
-    font-size: 16px;
-    border: 2px solid darkcyan;
-    border-radius: 5px;
-    cursor: pointer;
-    background-color: #fff;
-    transition: transform 0.3s ease, border-color 0.3s ease;
-    width: fit-content; /* Adjusts width to fit the content */
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centers content horizontally */
+  margin: 20px auto 0; /* Centers the container itself */
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid darkcyan;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #fff;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+  width: fit-content; /* Adjusts width to fit the content */
 }
 
 /* Centers the dropdown inside the container */
 .download-format {
-    margin-left: 10px; /* Adds spacing between icon and dropdown */
-    text-align: center;
-    font-size: 16px;
-    padding: 5px;
-    border-radius: 5px;
+  margin-left: 10px; /* Adds spacing between icon and dropdown */
+  text-align: center;
+  font-size: 16px;
+  padding: 5px;
+  border-radius: 5px;
 }
 
 /* Optional: Add hover effects */
 .download-container:hover {
-    border-color: rgb(0, 50, 50);
-    transform: scale(1.05);
+  border-color: rgb(0, 50, 50);
+  transform: scale(1.05);
+}
+
+.exchange{
+    margin-right: 33px;
 }
